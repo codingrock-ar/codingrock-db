@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+  mariadb:
+    image: mariadb:10.2
+    command: ["mysqld", "--innodb_strict_mode=off", "--default_time_zone=America/Argentina/Buenos_Aires", "--sql_mode=", "--max_connections=3000", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "--wait_timeout=28800", "--interactive_timeout=28800", "--max_allowed_packet=256M"]
+    ports:
+      - "3306:3306"
+    environment: 
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: usuario
+      MYSQL_PASSWORD: password
+
+    volumes:
+      - ./dump-sql:/docker-entrypoint-initdb.d
